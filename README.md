@@ -2,7 +2,7 @@
 
 The first assignment of E6998-5
 
-miaowmiaowmiaow [^1]
+miaowmiaowmiaow [note1](#tag1)
 
 
 ## Structure
@@ -46,4 +46,4 @@ Use github for mac
 
 
 
-[^1]: Cats are regarded as god in Egypt.
+<br><a name="tag1"></a> Cats are regarded as god in Egypt.
