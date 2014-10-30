@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
 
-<title> Agent Retrieve</title>
+<title> Try Page</title>
 </head>
 
 <body>
@@ -36,29 +36,28 @@ try {
 	
 	if(uName!=null){
 		
-		 MessageQueue queue=new MessageQueue("MyQueue");
+		 MessageQueue queue=new MessageQueue("testQueue");
 		 session.setAttribute("Queue",queue);
 		 String myQueueUrl=queue.intialQueue();
 		 session.setAttribute("QueueUrl",myQueueUrl);
 		 queue.send(myQueueUrl,uName);
 		
-		//conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
-		//Statement stat=conn.createStatement();
-		//String query="select * from Agent where Name='" + uName +"'";	
+		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/test","root","");
+		Statement stat=conn.createStatement();
+		String query="select * from Employees where first='" + uName +"'";	
 		
 		//SQS.getMessage(query);
 			
-	    //rs=stat.executeQuery(query);
-	    
-		response.sendRedirect("AgentRetrieveSucc.jsp");
-	/*	if (rs.next()){
+	    rs=stat.executeQuery(query);
+		
+		if (rs.next()){
 			 
 			//session.setAttribute("Name",uName);
-			response.sendRedirect("CusRetrieveSucc.jsp");
+			response.sendRedirect("test.jsp");
 		
      }
 		else
-		response.sendRedirect("CusRetrieve.jsp");*/
+		response.sendRedirect("Try.jsp");
   }
 }
 catch (Exception e)
@@ -76,18 +75,20 @@ catch (Exception e)
 </body>
 
 
+
 <body>
-<center><h3>Agent Retrieve</h3></center>
+<h3>Home Page</h3>
           </head>
-    <center>
+    
            <form><br>
           ID £º<input type="Text" name="Name"  ></input><br>
               <br>
-               
-        <input type="submit" name="submit"></input>
+              </form>
+              
+<a href="Agent.jsp"><input type="button" VALUE="I am Agent"></a>    <a href="Customer.jsp"><input type="button" VALUE="I am Customer"></a> <br><br>
+<a href="Registration.jsp"><input type="button" VALUE="Sigh Up"></a>
 
-          </form>       
-            </center>
+         
 </body>
 
 

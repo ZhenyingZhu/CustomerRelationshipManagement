@@ -4,7 +4,8 @@
 <%@ page import="java.sql.*" %>
 <%@ page language="java" import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
-
+<html>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 
 <body>
 
@@ -84,7 +85,7 @@ catch (Exception e)
              Agent £º&nbsp;&nbsp; &nbsp; &nbsp;<input type="Text" name="AgentName"  ></input><br><br>
           
       
-          <input type="submit" name="submit"></input>
+          <input  class="item" type="submit" name="submit"></input>
           </form>       
           
             </center>

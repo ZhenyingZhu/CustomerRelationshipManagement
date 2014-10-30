@@ -5,7 +5,9 @@
 <%@ page language="java" import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
 
+<html>
 
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 <body>
 
 <%
@@ -30,7 +32,7 @@ try {
 	
 	if(uName!=null){
 		
-		 MessageQueue queue=new MessageQueue("MyQueue18");
+		 MessageQueue queue=new MessageQueue("MyQueue1");
 		 session.setAttribute("Queue",queue);
 		 String myQueueUrl=queue.intialQueue();
 		 session.setAttribute("QueueUrl",myQueueUrl);
@@ -41,11 +43,11 @@ try {
 		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
 		Statement stat=conn.createStatement();
 		   
-		String query="update Cus Set Name= '"+uName+"', Phone='"+uPhone+"', Email='"+uEmail+"' WHERE Name='" +uName+"'";	
+		String query="insert into Agent values ('"+uName+"', '"+ uPhone +"', '" +uEmail +"')";	
 	
 	    stat.executeUpdate(query);
 	 
-		response.sendRedirect("CusUpdateSucc.jsp");
+		response.sendRedirect("AgentCreateSucc.jsp");
 
   }
 }
@@ -61,33 +63,19 @@ catch (Exception e)
 %>
 </body>
 
-
 <body>
-<center><h3>Update Customer Information</h3></center>
-          </head>
-    <center>
-           <form>
-           
-          
-           
+<h3>New Agent</h3>
+
+           <form>           
           Name £º<input type="Text" name="Name"  ></input><br><br>
-         
-          
-          
-          
-         
+
           Phone £º<input type="Text" name="Phone"  ></input><br><br>
-            
-             
-             
-             
-            
+      
           Email £º<input type="Text" name="Email"  ></input><br><br>
                      
-          <input type="submit" name="submit"></input>
+          <input class="item" type="submit" name="submit"></input>
           </form>       
-          
-            </center>
+
 </body>
 
 

@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update AgentInfo Success</title>
+<title>Text Create Success</title>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -19,16 +20,20 @@
 
 MessageQueue queue=(MessageQueue)session.getAttribute("Queue");
 List<Message> messages=queue.receive((String)session.getAttribute("QueueUrl"));
-String uName=null;
-String uPhone=null;
-String uEmail=null;
+String Cus=null;
+String Agent=null;
+String Model=null;
+String Text=null;
 
  if(messages.size()>0){
 	 String mes=messages.get(0).getBody();
 	 String[] mess=mes.split(" ");
-  uName=mess[0];
-  uPhone=mess[1];
-  uEmail=mess[2];
+  Cus=mess[0];
+  Agent=mess[1];
+  Model=mess[2];
+  Text=mess[3];
+  for(int i=4;i<mess.length;i++)
+	  Text=Text+" "+mess[i];
   queue.deleteMessage(messages, (String)session.getAttribute("QueueUrl"));
 }
   
@@ -38,8 +43,7 @@ String uEmail=null;
 %>
 
 <center>
-
-<td width="100"> Update AgentInfo Successfully </td>
+<td width="100"> Create A new Text </td>
 
 <table>
 
@@ -50,19 +54,22 @@ String uEmail=null;
 
 <tr>
 
-<td width="200">Name:  <%=uName %></td>
+<td width="200">Customer:  <%=Cus %></td>
 
 </tr>
 <tr>
-<td width="200">Phone:  <%=uPhone %></td>
+<td width="200">Agent:  <%=Agent %></td>
 </tr>
 
 <tr>
-<td width="200">Email:  <%=uEmail %></td>
+<td width="200">Model: <%=Model %></td>
+</tr>
+
+<tr>
+<td width="200">Text: <%=Text %></td>
 </tr>
 </table>
 <br><br><br>
-<a href="Home.jsp"><b><font style="font-weight:bold" face="Times New Roman" size="3"></font></b>Back Home</a>
 </center>
 </body>
 </html>

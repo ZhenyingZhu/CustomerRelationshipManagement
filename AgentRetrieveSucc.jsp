@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 <title>Find Agent Successfully</title>
 </head>
 <body>
@@ -62,7 +63,6 @@ if (rs.next())
 </tr>
 </table>
 <br><br><br>
-<a href="Home.jsp"><b><font style="font-weight:bold" face="Times New Roman" size="3"></font></b>Back Home</a>
 </center>
 
 <%

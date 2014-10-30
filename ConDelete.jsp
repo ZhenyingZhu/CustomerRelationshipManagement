@@ -5,7 +5,8 @@
 <%@ page language="java" import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
 
-
+<html>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 <body>
 
 <%
@@ -17,32 +18,33 @@ Connection conn=null;
 ResultSet rs=null;
 
 
-String uName="";
+String Customer="";
 String error_msg="";
-String uPhone="";
-String uEmail="";
+String Agent="";
 
 try {
 	
-	uName=request.getParameter("Name");
+	Customer=request.getParameter("Customer");
+	Agent=request.getParameter("Agent");
 	
-	if(uName!=null){
+	if(Customer!=null){
 		
-		 MessageQueue queue=new MessageQueue("MyQueue18");
+		 MessageQueue queue=new MessageQueue("MyQueue2");
 		 session.setAttribute("Queue",queue);
 		 String myQueueUrl=queue.intialQueue();
 		 session.setAttribute("QueueUrl",myQueueUrl);
-		  queue.send(myQueueUrl,uName);
+		 String mes=Customer+" "+Agent;
+		  queue.send(myQueueUrl,mes);
 	
 		
 		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
 		Statement stat=conn.createStatement();
 		   
-		String query="delete from Cus where Name='"+uName+"'";	
+		String query="delete from Contact where Cus='"+Customer+"' AND Agent='"+Agent+"'";	
 	
 	    stat.executeUpdate(query);
 	 
-		response.sendRedirect("CusDeleteSucc.jsp");
+		response.sendRedirect("ConDeleteSucc.jsp");
 
   }
 }
@@ -60,16 +62,17 @@ catch (Exception e)
 
 
 <body>
-<center><h3>Deleting Customer</h3></center>
+<center><h3>Deleting Text</h3></center>
           </head>
     <center>
            <form>
            
           
            
-          Name £º<input type="Text" name="Name"  ></input><br><br>
+          Customer £º<input type="Text" name="Customer"  ></input><br><br>
+          Agent £º&nbsp; &nbsp; &nbsp;<input type="Text" name="Agent"  ></input><br><br>
          
-          <input type="submit" name="submit"></input>
+          <input  class="item" type="submit" name="submit"></input>
           </form>       
           
             </center>

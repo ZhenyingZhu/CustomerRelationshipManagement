@@ -5,7 +5,8 @@
 <%@ page language="java" import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
 
-
+<html>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 <body>
 
 <%
@@ -19,6 +20,8 @@ ResultSet rs=null;
 
 String uName="";
 String error_msg="";
+String uPhone="";
+String uEmail="";
 
 try {
 	
@@ -26,7 +29,7 @@ try {
 	
 	if(uName!=null){
 		
-		 MessageQueue queue=new MessageQueue("MyQueue10");
+		 MessageQueue queue=new MessageQueue("MyQueue18");
 		 session.setAttribute("Queue",queue);
 		 String myQueueUrl=queue.intialQueue();
 		 session.setAttribute("QueueUrl",myQueueUrl);
@@ -36,11 +39,11 @@ try {
 		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
 		Statement stat=conn.createStatement();
 		   
-		String query="delete from Agent where Name='"+uName+"'";	
+		String query="delete from Cus where Name='"+uName+"'";	
 	
 	    stat.executeUpdate(query);
 	 
-		response.sendRedirect("AgentDeleteSucc.jsp");
+		response.sendRedirect("CusDeleteSucc.jsp");
 
   }
 }
@@ -58,7 +61,7 @@ catch (Exception e)
 
 
 <body>
-<center><h3>Deleting Agent</h3></center>
+<center><h3>Deleting Customer</h3></center>
           </head>
     <center>
            <form>
@@ -67,7 +70,7 @@ catch (Exception e)
            
           Name £º<input type="Text" name="Name"  ></input><br><br>
          
-          <input type="submit" name="submit"></input>
+          <input  class="item" type="submit" name="submit"></input>
           </form>       
           
             </center>

@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delete Text Success</title>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
+<title>Delete Customer Success</title>
 </head>
 <body>
 
@@ -19,14 +20,12 @@
 
 MessageQueue queue=(MessageQueue)session.getAttribute("Queue");
 List<Message> messages=queue.receive((String)session.getAttribute("QueueUrl"));
-String Customer=null;
-String Agent=null;
+String uName=null;
+String uPhone=null;
+String uEmail=null;
 
  if(messages.size()>0){
-	  String mess=messages.get(0).getBody();
-	  String[] mes=mess.split(" ");
-	  Customer=mes[0];
-	  Agent=mes[1];
+	  uName=messages.get(0).getBody();
      queue.deleteMessage(messages, (String)session.getAttribute("QueueUrl"));
 }
   
@@ -36,7 +35,7 @@ String Agent=null;
 %>
 
 <center>
-<td width="100"> Delete Text Successfully </td>
+<td width="100"> Delete A  Customer Successfully </td>
 
 <table>
 
@@ -48,26 +47,11 @@ String Agent=null;
 
 <tr>
 
-<td width="200">Deleted Text Between </td>
+<td width="200">Deleted User <%=uName %></td>
 
 </tr>
-
-<tr>
-
-<td width="200">Customer: <%=Customer %></td>
-
-</tr>
-
-<tr>
-
-<td width="200">Agent: <%=Agent %></td>
-
-</tr>
-
 </table>
 <br><br><br>
-<a href="Home.jsp"><b><font style="font-weight:bold" face="Times New Roman" size="3"></font></b>Back Home</a>
 </center>
-
 </body>
 </html>

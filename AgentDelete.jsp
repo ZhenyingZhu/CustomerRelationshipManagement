@@ -4,8 +4,8 @@
 <%@ page import="java.sql.*" %>
 <%@ page language="java" import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
-
-
+<html>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 <body>
 
 <%
@@ -19,33 +19,28 @@ ResultSet rs=null;
 
 String uName="";
 String error_msg="";
-String uPhone="";
-String uEmail="";
 
 try {
 	
 	uName=request.getParameter("Name");
-	uPhone=request.getParameter("Phone");
-	uEmail=request.getParameter("Email");
 	
 	if(uName!=null){
 		
-		 MessageQueue queue=new MessageQueue("MyQueue18");
+		 MessageQueue queue=new MessageQueue("MyQueue10");
 		 session.setAttribute("Queue",queue);
 		 String myQueueUrl=queue.intialQueue();
 		 session.setAttribute("QueueUrl",myQueueUrl);
-		 String msm=uName+" "+uPhone+" "+uEmail;
-		  queue.send(myQueueUrl,msm);
+		  queue.send(myQueueUrl,uName);
 	
 		
 		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
 		Statement stat=conn.createStatement();
 		   
-		String query="update Agent Set Name= '"+uName+"', Phone='"+uPhone+"', Email='"+uEmail+"' WHERE Name='" +uName+"'";	
+		String query="delete from Agent where Name='"+uName+"'";	
 	
 	    stat.executeUpdate(query);
 	 
-		response.sendRedirect("AgentUpdateSucc.jsp");
+		response.sendRedirect("AgentDeleteSucc.jsp");
 
   }
 }
@@ -63,7 +58,7 @@ catch (Exception e)
 
 
 <body>
-<center><h3>Update Agent Information</h3></center>
+<center><h3>Deleting Agent</h3></center>
           </head>
     <center>
            <form>
@@ -72,19 +67,7 @@ catch (Exception e)
            
           Name £º<input type="Text" name="Name"  ></input><br><br>
          
-          
-          
-          
-         
-          Phone £º<input type="Text" name="Phone"  ></input><br><br>
-            
-             
-             
-             
-            
-          Email £º<input type="Text" name="Email"  ></input><br><br>
-                     
-          <input type="submit" name="submit"></input>
+          <input  class="item" type="submit" name="submit"></input>
           </form>       
           
             </center>

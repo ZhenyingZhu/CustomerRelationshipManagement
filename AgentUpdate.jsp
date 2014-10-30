@@ -5,7 +5,8 @@
 <%@ page language="java" import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
 
-
+<html>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 <body>
 
 <%
@@ -41,11 +42,11 @@ try {
 		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
 		Statement stat=conn.createStatement();
 		   
-		String query="insert into Cus values ('"+uName+"', '"+ uPhone +"', '" +uEmail +"')";	
+		String query="update Agent Set Name= '"+uName+"', Phone='"+uPhone+"', Email='"+uEmail+"' WHERE Name='" +uName+"'";	
 	
 	    stat.executeUpdate(query);
 	 
-		response.sendRedirect("CusCreateSucc.jsp");
+		response.sendRedirect("AgentUpdateSucc.jsp");
 
   }
 }
@@ -63,7 +64,7 @@ catch (Exception e)
 
 
 <body>
-<center><h3>New Customer</h3></center>
+<center><h3>Update Agent Information</h3></center>
           </head>
     <center>
            <form>
@@ -84,7 +85,7 @@ catch (Exception e)
             
           Email £º<input type="Text" name="Email"  ></input><br><br>
                      
-          <input type="submit" name="submit"></input>
+          <input  class="item" type="submit" name="submit"></input>
           </form>       
           
             </center>

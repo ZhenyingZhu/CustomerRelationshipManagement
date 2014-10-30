@@ -5,7 +5,8 @@
 <%@ page language="java" import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
 
-
+<html>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 <body>
 
 <%
@@ -17,33 +18,37 @@ Connection conn=null;
 ResultSet rs=null;
 
 
-String Customer="";
+String Cus="";
 String error_msg="";
 String Agent="";
+String Model="";
+String Text="";
 
 try {
 	
-	Customer=request.getParameter("Customer");
+	Cus=request.getParameter("Customer");
 	Agent=request.getParameter("Agent");
+	Model=request.getParameter("Model");
+	Text=request.getParameter("TextSummary");
 	
-	if(Customer!=null){
+	if(Cus!=null){
 		
 		 MessageQueue queue=new MessageQueue("MyQueue2");
 		 session.setAttribute("Queue",queue);
 		 String myQueueUrl=queue.intialQueue();
 		 session.setAttribute("QueueUrl",myQueueUrl);
-		 String mes=Customer+" "+Agent;
-		  queue.send(myQueueUrl,mes);
+		 String msm=Cus+" "+Agent+" "+Model+" "+Text;
+		  queue.send(myQueueUrl,msm);
 	
 		
 		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
 		Statement stat=conn.createStatement();
 		   
-		String query="delete from Contact where Cus='"+Customer+"' AND Agent='"+Agent+"'";	
+		String query="update Contact Set Cus='"+Cus+"', Agent='"+Agent+"', Model='"+Model+"',TextSum='"+Text+"' WHERE Cus='" +Cus+"' AND Agent='"+Agent+"'";	
 	
 	    stat.executeUpdate(query);
 	 
-		response.sendRedirect("ConDeleteSucc.jsp");
+		response.sendRedirect("ConUpdateSucc.jsp");
 
   }
 }
@@ -61,17 +66,22 @@ catch (Exception e)
 
 
 <body>
-<center><h3>Deleting Text</h3></center>
+<center><h3>Update Contact History</h3></center>
           </head>
     <center>
            <form>
            
-          
-           
+       
           Customer £º<input type="Text" name="Customer"  ></input><br><br>
-          Agent £º&nbsp; &nbsp; &nbsp;<input type="Text" name="Agent"  ></input><br><br>
-         
-          <input type="submit" name="submit"></input>
+      
+          Agent £º &nbsp; &nbsp; <input type="Text" name="Agent"  ></input><br><br> 
+            
+          Model £º   &nbsp; &nbsp; <input type="Text" name="Model"  ></input><br><br>
+          
+          Text £º    &nbsp; &nbsp; &nbsp;&nbsp; <input type="Text" name="TextSummary"  ></input><br><br>
+                     
+                     
+          <input  class="item" type="submit" name="submit"></input>
           </form>       
           
             </center>

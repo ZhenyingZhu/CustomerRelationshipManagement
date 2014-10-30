@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Update CusInfo Success</title>
+<title>Delete Text Success</title>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -19,17 +20,15 @@
 
 MessageQueue queue=(MessageQueue)session.getAttribute("Queue");
 List<Message> messages=queue.receive((String)session.getAttribute("QueueUrl"));
-String uName=null;
-String uPhone=null;
-String uEmail=null;
+String Customer=null;
+String Agent=null;
 
  if(messages.size()>0){
-	 String mes=messages.get(0).getBody();
-	 String[] mess=mes.split(" ");
-  uName=mess[0];
-  uPhone=mess[1];
-  uEmail=mess[2];
-  queue.deleteMessage(messages, (String)session.getAttribute("QueueUrl"));
+	  String mess=messages.get(0).getBody();
+	  String[] mes=mess.split(" ");
+	  Customer=mes[0];
+	  Agent=mes[1];
+     queue.deleteMessage(messages, (String)session.getAttribute("QueueUrl"));
 }
   
    queue.deleteQueue((String)session.getAttribute("QueueUrl"));
@@ -38,8 +37,7 @@ String uEmail=null;
 %>
 
 <center>
-
-<td width="100"> Update CusInfo Successfully </td>
+<td width="100"> Delete Text Successfully </td>
 
 <table>
 
@@ -48,21 +46,27 @@ String uEmail=null;
 
 <br><br>
 
+
 <tr>
 
-<td width="200">Name:  <%=uName %></td>
+<td width="200">Deleted Text Between </td>
 
-</tr>
-<tr>
-<td width="200">Phone:  <%=uPhone %></td>
 </tr>
 
 <tr>
-<td width="200">Email:  <%=uEmail %></td>
+
+<td width="200">Customer: <%=Customer %></td>
+
 </tr>
+
+<tr>
+
+<td width="200">Agent: <%=Agent %></td>
+
+</tr>
+
 </table>
 <br><br><br>
-<a href="Home.jsp"><b><font style="font-weight:bold" face="Times New Roman" size="3"></font></b>Back Home</a>
 </center>
 
 </body>

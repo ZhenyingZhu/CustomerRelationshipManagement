@@ -1,17 +1,16 @@
-
-    
 <%@ page language="java" contentType="text/html;charset=GBK" pageEncoding="GBK" %>
-
 <%@ page import="java.sql.*" %>
 <%@ page import="com.amazonaws.services.sqs.model.Message" %>
 <%@ page import="java.util.List" %>
 <%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Find Customer Successfully</title>
+<title>Customer Success</title>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -44,26 +43,22 @@ ResultSet rs=stat.executeQuery("select * from Cus where Name= '"+uName+"'");
 if (rs.next())
 {	
 %>
-<center>
-<br><br><br>
 <table>
 <tr>
 
-<td width="200">Name: <%=rs.getString(1) %></td>
+<td width="20"> <%=rs.getString(1) %></td>
 
 </tr>
 <tr>
-<td width="200">Phone:  <%=rs.getString(2) %></td>
+<td width="20"> <%=rs.getString(2) %></td>
 </tr>
 
 <tr>
-<td width="200">Email:  <%=rs.getString(3) %></td>
+<td width="20"> <%=rs.getString(3) %></td>
 </tr>
 </table>
 
-<br><br>
-<a href="Home.jsp"><b><font style="font-weight:bold" face="Times New Roman" size="3"></font></b>Back Home</a>
-</center>
+
 <%
   }
 }

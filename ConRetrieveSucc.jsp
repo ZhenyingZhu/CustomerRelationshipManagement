@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Delete Agent Success</title>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
+<title>Contact History</title>
 </head>
 <body>
 
@@ -19,11 +20,21 @@
 
 MessageQueue queue=(MessageQueue)session.getAttribute("Queue");
 List<Message> messages=queue.receive((String)session.getAttribute("QueueUrl"));
-String uName=null;
+String Cus=null;
+String Agent=null;
+String Model=null;
+String Text=null;
 
  if(messages.size()>0){
-	  uName=messages.get(0).getBody();
-     queue.deleteMessage(messages, (String)session.getAttribute("QueueUrl"));
+	 String mes=messages.get(0).getBody();
+	 String[] mess=mes.split(" ");
+  Cus=mess[0];
+  Agent=mess[1];
+  Model=mess[2];
+  Text=mess[3];
+  for(int i=4;i<mess.length;i++)
+    Text=Text+" "+mess[i];
+  queue.deleteMessage(messages, (String)session.getAttribute("QueueUrl"));
 }
   
    queue.deleteQueue((String)session.getAttribute("QueueUrl"));
@@ -32,7 +43,7 @@ String uName=null;
 %>
 
 <center>
-<td width="100"> Delete An Agent Successfully </td>
+<td width="100">Contact History Summary</td>
 
 <table>
 
@@ -41,15 +52,25 @@ String uName=null;
 
 <br><br>
 
-
 <tr>
 
-<td width="200">Deleted Agent: <%=uName %></td>
+<td width="200">Customer: <%=Cus %></td>
 
+</tr>
+<tr>
+<td width="200">Agent:  <%=Agent %></td>
+</tr>
+
+<tr>
+<td width="200"> Model: <%=Model %></td>
+</tr>
+
+<tr>
+<td width="200">Text:   <%=Text %></td>
 </tr>
 </table>
 <br><br><br>
-<a href="Home.jsp"><b><font style="font-weight:bold" face="Times New Roman" size="3"></font></b>Back Home</a>
 </center>
+
 </body>
 </html>

@@ -11,7 +11,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Agent Create Success</title>
+<title>Customer Create Success</title>
+ <link href="styles/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -35,10 +36,24 @@ String uEmail=null;
    queue.deleteQueue((String)session.getAttribute("QueueUrl"));
  
 
+//String uName="";
+//if (session.getAttribute("Name")!=null);
+/*if (uName!=null)
+{
+Class.forName("com.mysql.jdbc.Driver");
+
+Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/app","root","");
+
+Statement stat=conn.createStatement();
+
+ResultSet rs=stat.executeQuery("insert into Cus values ('"+uName+"','"+uPhone+"','"+uEmail+"')");
+
+if (rs.next())
+{	*/
 %>
 
 <center>
-<td width="100"> Create A new Agent Successfully </td>
+<td width="100"> Create A new Customer Successfully </td>
 
 <table>
 
@@ -57,11 +72,11 @@ String uEmail=null;
 </tr>
 
 <tr>
-<td width="200">Email:  <%=uEmail %></td>
+<td width="200">Email: <%=uEmail %></td>
 </tr>
 </table>
+
 <br><br><br>
-<a href="Home.jsp"><b><font style="font-weight:bold" face="Times New Roman" size="3"></font></b>Back Home</a>
 </center>
 
 </body>
