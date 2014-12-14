@@ -5,7 +5,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="com.amazonaws.services.sqs.model.Message" %>
 <%@ page import="java.util.List" %>
-<%@ page import="example.SimpleQueueService, example.Test, example.MessageQueue"%>
+<%@ page import="example.SimpleQueueService, example.MessageQueue,example.ReceiveLogsTopic"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,10 +20,16 @@
 
 MessageQueue queue=(MessageQueue)session.getAttribute("Queue");
 List<Message> messages=queue.receive((String)session.getAttribute("QueueUrl"));
+
+/*
+String[] argv=new String[1];
+argv[0]="*.create.*";
+String message=ReceiveLogsTopic.receive(argv);
+*/
+
 String uName=null;
 String uPhone=null;
 String uEmail=null;
-
  if(messages.size()>0){
 	 String mes=messages.get(0).getBody();
 	 String[] mess=mes.split(" ");
@@ -34,7 +40,13 @@ String uEmail=null;
 }
   
    queue.deleteQueue((String)session.getAttribute("QueueUrl"));
- 
+   
+   
+  /* String[] mess=message.split(" ");
+   uName=mess[0];
+   uPhone=mess[1];
+   uEmail=mess[2];
+ */
 
 //String uName="";
 //if (session.getAttribute("Name")!=null);
