@@ -22,3 +22,16 @@ Commerce App
 
 
 
+
+
+
+Notice
+
+1. CRM Commerce
+   Credential 两边的文件都要修改 .aws / JavaResource Example
+
+2. REST
+put files in vogella in a package
+use jersey 1.18
+add jersey-bundle and asm 1.3 jar
+put the jars both in build path and WEN-INF/lib
